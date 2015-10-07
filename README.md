@@ -48,9 +48,9 @@ mysql:
   image: mysql:5.7
   container_name: project-name-mysql
   environment:
-  - MYSQL_DATABASE=content-hub
+  - MYSQL_DATABASE=database-name
   - MYSQL_ROOT_PASSWORD=pizza
-  - MYSQL_USER=content-hub
+  - MYSQL_USER=database-user
   - MYSQL_PASSWORD=pizza
   ports:
    - "3306:3306"
