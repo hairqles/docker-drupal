@@ -1,7 +1,7 @@
 FROM php:5.5-apache
 
 # General purpose packages.
-RUN apt-get update && apt-get -y install git-core wget
+RUN apt-get update && apt-get -y install git-core wget php5-gd
 # drush: instead of installing a package, pull via composer into /opt/composer
 # http://www.whaaat.com/installing-drush-7-using-composer
 RUN curl -sS https://getcomposer.org/installer | php && \
