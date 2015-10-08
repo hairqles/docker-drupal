@@ -28,6 +28,8 @@ RUN wget http://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.2.tar.gz &&
 # Check drush.
 RUN /bin/drush --version
 
+RUN a2enmod rewrite
+
 VOLUME ["/var/www/html"]
 
 EXPOSE 80
