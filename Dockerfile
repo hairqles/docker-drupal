@@ -1,7 +1,7 @@
 FROM php:5.5-apache
 
 # General purpose packages.
-RUN apt-get update && apt-get -y install git-core wget mysql-client php5-mysql \
+RUN apt-get update && apt-get -y install git-core wget mysql-client php5-mysql ant openjdk-7-jdk \
        	libfreetype6-dev \
    		libjpeg62-turbo-dev \
         libmcrypt-dev \
@@ -11,6 +11,9 @@ RUN apt-get update && apt-get -y install git-core wget mysql-client php5-mysql \
     && docker-php-ext-install gd \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install pdo pdo_mysql
+
+# enable mod_rewrite
+RUN a2enmod rewrite
 
 # drush: instead of installing a package, pull via composer into /opt/composer
 # http://www.whaaat.com/installing-drush-7-using-composer
@@ -28,7 +31,9 @@ RUN wget http://ftp.drupal.org/files/projects/registry_rebuild-7.x-2.2.tar.gz &&
 # Check drush.
 RUN /bin/drush --version
 
-RUN a2enmod rewrite
+ENV SSH_KEY id_rsa
+
+RUN  echo "IdentityFile ~/.ssh/$SSH_KEY" >> /etc/ssh/ssh_config
 
 VOLUME ["/var/www/html"]
 
